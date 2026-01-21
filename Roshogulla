@@ -1,69 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Supplementary Materials - ExZa2714@500Days</title>
-    <style>
-        body { 
-            font-family: monospace; 
-            background: black; 
-            color: lime; 
-            padding: 50px; 
-            text-align: center;
-        }
-        input { 
-            font-size: 20px; 
-            padding: 15px; 
-            width: 300px; 
-            margin: 10px;
-            font-family: monospace;
-        }
-        button { 
-            font-size: 18px; 
-            padding: 15px 30px; 
-            background: #333; 
-            color: lime; 
-            border: 2px solid lime;
-            cursor: pointer;
-            font-family: monospace;
-        }
-        button:hover { background: lime; color: black; }
-        #error { color: red; font-size: 18px; }
-        #content { display: none; color: white; font-size: 18px; line-height: 1.6; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExZa2714 Supplementary Access</title>
 </head>
-<body>
-    <h1>[ EXZA2714 TERMINAL ]</h1>
-    <p>Enter clearance code for supplementary data access:</p>
+<body style="font-family:monospace;background:black;color:lime;padding:50px;text-align:center;margin:0;">
     
-    <input type="password" id="pass" placeholder="CLEARANCE CODE">
-    <br>
-    <button onclick="checkPass()">AUTHENTICATE</button>
-    <p id="error"></p>
+    <!-- PASSWORD SCREEN (visible by default) -->
+    <div id="login">
+        <h1>[ EXZA2714 TERMINAL ]</h1>
+        <p>Supplementary data clearance required:</p>
+        <input id="pass" type="password" placeholder="CLEARANCE CODE" 
+               style="font-size:20px;padding:15px;width:300px;margin:10px;font-family:monospace;">
+        <br>
+        <button onclick="checkPass()" 
+                style="font-size:18px;padding:15px 30px;background:#333;color:lime;border:2px solid lime;cursor:pointer;font-family:monospace;">
+            AUTHENTICATE
+        </button>
+        <p id="error" style="color:red;font-size:18px;"></p>
+    </div>
     
-    <div id="content">
-        <h2>*** ACCESS GRANTED ***</h2>
-        <p>YOUR SECRET CONTENT HERE</p>
-        <!-- Add your ZIP file, images, love messages here -->
+    <!-- SECRET CONTENT (hidden until correct password) -->
+    <div id="content" style="display:none;color:white;font-size:18px;line-height:1.6;">
+        <h2 style="color:lime;">*** ACCESS GRANTED ***</h2>
+        <p>YOUR PRIVATE CONTENT HERE</p>
+        <!-- Add images, ZIP links, text, etc. -->
+        <p><strong>Put all your secret stuff here!</strong></p>
     </div>
 
     <script>
     function checkPass() {
         const input = document.getElementById('pass').value;
         const hash = btoa(input + 'ExZa2714@500Days').slice(0, 12);
-        const correctHash = 'TmFhZ2luMDc';  // Naagin07 ✓
+        const correctHash = 'TmFhZ2luMDc';  // Naagin07 (hidden)
 
-        const error = document.getElementById('error');
-        const content = document.getElementById('content');
-        
         if (hash === correctHash) {
-            document.querySelector('input, button, p:not(#error)').style.display = 'none';
-            content.style.display = 'block';
+            // SUCCESS: Hide login, show content
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
         } else {
-            error.textContent = 'ACCESS DENIED';
+            // FAIL: Show error, clear input
+            document.getElementById('error').textContent = 'ACCESS DENIED';
             document.getElementById('pass').value = '';
         }
     }
     
+    // Enter key support
     document.getElementById('pass').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') checkPass();
     });
