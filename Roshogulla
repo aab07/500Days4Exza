@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supplementary Materials - ExZa2714@500Days</title>
+    <style>
+        body { 
+            font-family: monospace; 
+            background: black; 
+            color: lime; 
+            padding: 50px; 
+            text-align: center;
+        }
+        input { 
+            font-size: 20px; 
+            padding: 15px; 
+            width: 300px; 
+            margin: 10px;
+            font-family: monospace;
+        }
+        button { 
+            font-size: 18px; 
+            padding: 15px 30px; 
+            background: #333; 
+            color: lime; 
+            border: 2px solid lime;
+            cursor: pointer;
+            font-family: monospace;
+        }
+        button:hover { background: lime; color: black; }
+        #error { color: red; font-size: 18px; }
+        #content { display: none; color: white; font-size: 18px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <h1>[ EXZA2714 TERMINAL ]</h1>
+    <p>Enter clearance code for supplementary data access:</p>
+    
+    <input type="password" id="pass" placeholder="CLEARANCE CODE">
+    <br>
+    <button onclick="checkPass()">AUTHENTICATE</button>
+    <p id="error"></p>
+    
+    <div id="content">
+        <h2>*** ACCESS GRANTED ***</h2>
+        <p>YOUR SECRET CONTENT HERE</p>
+        <!-- Add your ZIP file, images, love messages here -->
+    </div>
+
+    <script>
+    function checkPass() {
+        const input = document.getElementById('pass').value;
+        const hash = btoa(input + 'ExZa2714@500Days').slice(0, 12);
+        const correctHash = 'TmFhZ2luMDc';  // Naagin07 ✓
+
+        const error = document.getElementById('error');
+        const content = document.getElementById('content');
+        
+        if (hash === correctHash) {
+            document.querySelector('input, button, p:not(#error)').style.display = 'none';
+            content.style.display = 'block';
+        } else {
+            error.textContent = 'ACCESS DENIED';
+            document.getElementById('pass').value = '';
+        }
+    }
+    
+    document.getElementById('pass').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') checkPass();
+    });
+    </script>
+</body>
+</html>
