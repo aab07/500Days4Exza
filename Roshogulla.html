@@ -29,7 +29,7 @@
     function checkPass() {
         const input = document.getElementById('pass').value;
         const hash = btoa(input + 'ALAL@NO1ELSEBUTYOU').slice(0, 12);
-        const correctHash = 'TmFhZ2luMDcz';  
+        const correctHash = 'TmFhZ2luMDczM';  
 
         if (hash === correctHash) {
             document.getElementById('login').style.display = 'none';
